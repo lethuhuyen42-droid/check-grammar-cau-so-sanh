@@ -1,0 +1,909 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Compare Showdown - Grade 10</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Quicksand:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  html { color-scheme: light; box-sizing: border-box; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body { margin: 0; }
+  [hidden] { display: none !important; }
+
+  :root {
+    --bg: #DCE1FF;
+    --grid: #CAD2F8;
+    --ink: #2A2540;
+    --muted: #5C577A;
+    --surface: #FFFFFF;
+    --field: #FFFFFF;
+    --track: #FFFFFF;
+    --ol: #2A2540;
+    --edge: #2A2540;
+    --p-start: #FFF1BE;
+    --p-quiz: #FFFDF7;
+    --p-res: #CFF0E0;
+    --lime: #DDF5A5;
+    --butter: #FFE9A0;
+    --peach: #FFC9AE;
+    --pink: #FFC4DD;
+    --mint: #BDEBD5;
+    --sky: #BFE0FF;
+    --lav: #CBC6FF;
+    --on-pastel: #2A2540;
+    --btn-bg: #2A2540;
+    --btn-fg: #FFF8E8;
+    --btn-shadow: #FF9EC8;
+    --fill: #9D98F7;
+    --ringc: #6C65E8;
+    --bad: #B3362F;
+    --f-display: 'Baloo 2', 'Quicksand', system-ui, sans-serif;
+    --f-body: 'Quicksand', 'Be Vietnam Pro', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --f-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1D1A33; --grid: #282448; --ink: #F1EEFF; --muted: #B7B2DA; --surface: #2F2A5C; --field: #1D1A33; --track: #1D1A33;
+      --ol: #0B0919; --edge: #0B0919; --p-start: #3C3570; --p-quiz: #2B2754; --p-res: #24474A;
+      --btn-bg: #F4F0FF; --btn-fg: #1B1830; --fill: #A9A4FF; --ringc: #B3AEFF; --bad: #FF9A98;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1D1A33; --grid: #282448; --ink: #F1EEFF; --muted: #B7B2DA; --surface: #2F2A5C; --field: #1D1A33; --track: #1D1A33;
+    --ol: #0B0919; --edge: #0B0919; --p-start: #3C3570; --p-quiz: #2B2754; --p-res: #24474A;
+    --btn-bg: #F4F0FF; --btn-fg: #1B1830; --fill: #A9A4FF; --ringc: #B3AEFF; --bad: #FF9A98;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background-color: var(--bg);
+    background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 36px 36px;
+    color: var(--ink);
+    font-family: var(--f-body);
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.6;
+    padding-inline: 16px;
+    padding-block: 0 56px;
+    min-height: 100%;
+  }
+  .page { max-width: 720px; margin-inline: auto; }
+  h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.1; font-weight: 800; }
+  p { margin: 0; }
+  button, input { font: inherit; color: inherit; }
+  :focus-visible { outline: 3px solid var(--fill); outline-offset: 3px; }
+
+  .eyebrow {
+    display: inline-block; font-weight: 700; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em;
+    padding: 3px 12px; border: 2.5px solid var(--ol); border-radius: 999px;
+    background: var(--lime); color: var(--on-pastel); line-height: 1.5;
+  }
+
+  .bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; margin-block: 14px 26px; background: var(--surface); border: 3px solid var(--ol); border-radius: 22px; box-shadow: 5px 5px 0 var(--edge); }
+  .bar-in { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 16px; min-height: 54px; }
+  .brand { font-family: var(--f-display); font-weight: 800; font-size: 1.3rem; line-height: 1; white-space: nowrap; padding-top: 4px; }
+  .brand span { background: var(--lav); color: var(--on-pastel); padding: 2px 10px; border-radius: 10px; border: 2.5px solid var(--ol); margin-left: 4px; }
+  .who { display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .who small { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-weight: 700; white-space: nowrap; }
+  .who b { font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; padding: 3px 14px; border-radius: 999px; background: var(--lime); color: var(--on-pastel); border: 2.5px solid var(--ol); }
+  .prog { height: 14px; margin: 0 16px 12px; background: var(--track); border: 2.5px solid var(--ol); border-radius: 999px; overflow: hidden; }
+  .prog-fill { height: 100%; width: 0; background: var(--fill); border-right: 2.5px solid var(--ol); border-radius: 999px; transition: width 0.35s ease; }
+
+  .panel { position: relative; background: var(--p-quiz); border: 3px solid var(--ol); border-radius: 28px; box-shadow: 8px 8px 0 var(--edge); padding: clamp(22px, 5vw, 38px); }
+  .panel > *:not(.deco) { position: relative; z-index: 1; }
+  .deco { position: absolute; inset: 0; overflow: hidden; border-radius: 25px; pointer-events: none; }
+  .deco span { position: absolute; display: block; border-radius: 50%; }
+  .deco .c { border: 3px solid var(--ol); }
+
+  .btn {
+    appearance: none; cursor: pointer; font-weight: 700; font-size: 1rem;
+    padding: 12px 28px; border-radius: 999px;
+    background: var(--btn-bg); color: var(--btn-fg);
+    border: 2.5px solid var(--ol);
+    box-shadow: 4px 4px 0 var(--btn-shadow);
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .btn:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--btn-shadow); }
+  .btn:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--btn-shadow); }
+  .btn.ghost { background: var(--surface); color: var(--ink); box-shadow: 4px 4px 0 var(--edge); }
+  .btn.ghost:hover { box-shadow: 5px 5px 0 var(--edge); }
+  .btn.ghost:active { box-shadow: 1px 1px 0 var(--edge); }
+  .btn.small { padding: 6px 16px; font-size: 0.9rem; box-shadow: 3px 3px 0 var(--edge); }
+  .btn.small:hover { box-shadow: 4px 4px 0 var(--edge); }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: 3px 3px 0 var(--edge); }
+
+  /* Start */
+  #start { background: var(--p-start); }
+  #start h1 { font-size: clamp(2.3rem, 8vw, 3.6rem); margin-block: 14px 14px; max-width: 9em; }
+  #start h1 em { font-style: normal; background: var(--pink); color: var(--on-pastel); padding: 0 12px; border-radius: 14px; border: 3px solid var(--ol); white-space: nowrap; }
+  .lead { color: var(--muted); max-width: 54ch; font-weight: 600; }
+  .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-block: 28px; padding: 0; list-style: none; }
+  .facts li { border: 2.5px solid var(--ol); border-radius: 18px; padding: 10px 14px 8px; box-shadow: 3px 3px 0 var(--edge); color: var(--on-pastel); }
+  .facts li:nth-child(1) { background: var(--mint); }
+  .facts li:nth-child(2) { background: var(--pink); }
+  .facts li:nth-child(3) { background: var(--sky); }
+  .facts b { display: block; font-family: var(--f-display); font-size: 1.7rem; line-height: 1.1; font-weight: 800; }
+  .facts span { font-size: 0.85rem; font-weight: 700; }
+  .field label { display: block; font-weight: 700; margin-bottom: 8px; }
+  .field input { width: 100%; padding: 12px 18px; border-radius: 999px; border: 3px solid var(--ol); background: var(--field); font-size: 1.05rem; font-weight: 600; }
+  .field input::placeholder { color: var(--muted); opacity: 0.8; }
+  .field input:focus { outline: none; box-shadow: 4px 4px 0 var(--lav); }
+  .err { color: var(--bad); font-size: 0.9rem; font-weight: 700; min-height: 1.4em; margin-top: 8px; }
+  .start-row { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 12px 16px; }
+  .start-row .field { flex: 1 1 260px; min-width: 0; }
+
+  /* Round screen */
+  #round .panel { background: var(--p-start); }
+  #round h2 { font-size: clamp(2rem, 7vw, 3rem); margin-block: 14px 4px; }
+  #round .sub { color: var(--muted); font-weight: 700; margin-bottom: 20px; }
+  .rchip { display: inline-block; padding: 2px 14px; border: 2.5px solid var(--ol); border-radius: 999px; color: var(--on-pastel); font-weight: 700; font-size: 0.88rem; line-height: 1.6; }
+  .c0 { background: var(--mint); } .c1 { background: var(--pink); } .c2 { background: var(--sky); } .c3 { background: var(--butter); } .c4 { background: var(--lav); }
+  .summary { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px; }
+  .summary .chip { padding: 4px 16px; border: 2.5px solid var(--ol); border-radius: 999px; background: var(--surface); box-shadow: 3px 3px 0 var(--edge); font-weight: 700; }
+
+  /* Quiz */
+  .qmeta { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px 12px; margin-bottom: 16px; }
+  .qmeta .num { font-family: var(--f-display); font-weight: 800; font-size: 1.15rem; padding: 2px 16px; border: 2.5px solid var(--ol); border-radius: 999px; background: var(--sky); color: var(--on-pastel); line-height: 1.5; }
+  .qmeta .stats { display: flex; flex-wrap: wrap; gap: 8px; }
+  .qmeta .tally { font-weight: 700; font-size: 0.9rem; padding: 3px 14px; border: 2.5px solid var(--ol); border-radius: 999px; background: var(--mint); color: var(--on-pastel); }
+  .qmeta .tally.combo { background: var(--peach); }
+  .qtop { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .sentence { font-size: clamp(1.2rem, 3.8vw, 1.55rem); font-weight: 600; line-height: 2.1; margin-block: 14px 8px; overflow-wrap: anywhere; }
+  .gapbox { display: inline-block; min-width: 4.5em; text-align: center; padding: 0 10px; margin-inline: 4px; border: 3px solid var(--ol); border-radius: 12px; background: var(--butter); color: var(--on-pastel); font-weight: 700; line-height: 1.55; box-shadow: 3px 3px 0 var(--edge); }
+  .gapbox.ok { background: var(--mint); }
+  .gapbox.no { background: var(--pink); }
+  .blank { display: inline-block; max-width: 100%; text-align: center; padding: 0 8px; margin-inline: 4px; border: 3px solid var(--ol); border-radius: 12px; background: var(--butter); color: var(--on-pastel); font-weight: 700; line-height: 1.55; box-shadow: 3px 3px 0 var(--edge); }
+  .blank:focus { outline: none; background: #FFFFFF; box-shadow: 3px 3px 0 var(--fill); }
+  .blank.ok { background: var(--mint); }
+  .blank.no { background: var(--pink); }
+  .seg { border-bottom: 3px solid var(--ink); margin-inline: 2px; padding-inline: 2px; }
+  .seg i { font-style: normal; font-family: var(--f-display); font-weight: 800; font-size: 0.72rem; display: inline-grid; place-items: center; min-width: 1.5em; height: 1.5em; margin-right: 4px; border: 2px solid var(--ol); border-radius: 50%; background: var(--lav); color: var(--on-pastel); vertical-align: 0.15em; }
+  .note-line { color: var(--muted); font-size: 0.95rem; min-height: 1.2em; }
+  .note-line b { color: var(--ink); }
+
+  .opts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 14px; margin-top: 18px; }
+  .opt { appearance: none; cursor: pointer; text-align: left; display: flex; align-items: center; gap: 12px; padding: 12px 16px; border: 3px solid var(--ol); border-radius: 18px; background: var(--surface); color: var(--ink); box-shadow: 4px 4px 0 var(--edge); font-weight: 700; font-size: 1.05rem; line-height: 1.35; transition: transform 0.12s ease, box-shadow 0.12s ease; overflow-wrap: anywhere; }
+  .opt .let { flex: none; width: 32px; height: 32px; display: grid; place-items: center; border: 2.5px solid var(--ol); border-radius: 50%; background: var(--lav); color: var(--on-pastel); font-family: var(--f-display); font-weight: 800; line-height: 1; padding-top: 2px; }
+  .opt:hover:not(:disabled) { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--edge); }
+  .opt:active:not(:disabled) { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--edge); }
+  .opt:disabled { cursor: default; }
+  .opt.ok { background: var(--mint); color: var(--on-pastel); }
+  .opt.no { background: var(--pink); color: var(--on-pastel); }
+  .opt.off { opacity: 0.35; text-decoration: line-through; box-shadow: none; }
+
+  .tools { display: flex; flex-wrap: wrap; gap: 10px 12px; align-items: center; padding-top: 16px; margin-top: 18px; border-top: 3px dashed var(--ol); }
+  .tools .lbl { color: var(--muted); font-size: 0.9rem; font-weight: 700; }
+  .rulebox { margin-top: 16px; padding: 12px 18px; border: 3px solid var(--ol); border-radius: 18px; background: var(--butter); color: var(--on-pastel); font-size: 0.95rem; box-shadow: 4px 4px 0 var(--edge); }
+  .rulebox .head { font-family: var(--f-display); font-weight: 800; font-size: 1.1rem; margin-bottom: 4px; }
+  .rulebox p + p { margin-top: 4px; }
+  .mono { font-family: var(--f-mono); font-size: 0.88em; font-weight: 500; }
+  .feedback { margin-top: 20px; padding: 14px 18px; border-radius: 20px; font-size: 0.98rem; border: 3px solid var(--ol); color: var(--on-pastel); box-shadow: 4px 4px 0 var(--edge); }
+  .feedback.ok { background: var(--mint); }
+  .feedback.no { background: var(--pink); }
+  .feedback .head { font-family: var(--f-display); font-weight: 800; font-size: 1.2rem; line-height: 1.3; }
+  .feedback .why { margin-top: 6px; }
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; margin-top: 24px; }
+  .actions .note { color: var(--muted); font-size: 0.88rem; }
+
+  /* Result */
+  #result .panel { background: var(--p-res); }
+  .score-top { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 26px; align-items: center; }
+  .ring { position: relative; width: 160px; height: 160px; background: var(--surface); border: 3px solid var(--ol); border-radius: 50%; box-shadow: 4px 4px 0 var(--edge); }
+  .ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .ring .track { stroke: var(--track); }
+  .ring .val { stroke: var(--ringc); transition: stroke-dashoffset 0.9s ease; }
+  .ring .mid { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; }
+  .ring .mid b { font-family: var(--f-display); font-size: 2.8rem; line-height: 1; font-weight: 800; }
+  .ring .mid span { font-size: 0.75rem; color: var(--muted); font-weight: 700; }
+  .score-text h2 { font-size: clamp(1.8rem, 6vw, 2.5rem); margin-block: 10px 6px; }
+  .score-text p { color: var(--muted); }
+  .score-text p b { color: var(--ink); }
+  #resName { background: var(--sky); max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top; }
+  .result-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
+  .breakdown { margin-top: 30px; padding-top: 22px; border-top: 3px dashed var(--ol); display: grid; gap: 12px; }
+  .breakdown h3 { font-size: 1.3rem; }
+  .brow { display: grid; grid-template-columns: minmax(0, 8.5em) minmax(0, 1fr) 3.2em; gap: 12px; align-items: center; }
+  .brow .nm { font-weight: 700; font-size: 0.95rem; line-height: 1.25; }
+  .btrack { height: 18px; background: var(--track); border: 2.5px solid var(--ol); border-radius: 999px; overflow: hidden; }
+  .bfill { height: 100%; border-right: 2.5px solid var(--ol); border-radius: 999px; }
+  .brow .n { font-family: var(--f-display); font-weight: 800; text-align: right; }
+  .review-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px 16px; margin-block: 40px 18px; }
+  .review-head h2 { font-size: 1.6rem; background: var(--butter); color: var(--on-pastel); border: 3px solid var(--ol); border-radius: 18px; padding: 4px 18px 0; box-shadow: 4px 4px 0 var(--edge); }
+  .review-head .eyebrow { background: var(--pink); }
+  .review-list { display: grid; gap: 18px; padding: 0; margin: 0; list-style: none; }
+  .rv { background: var(--surface); border: 3px solid var(--ol); border-radius: 24px; box-shadow: 6px 6px 0 var(--edge); padding: 20px clamp(18px, 4vw, 28px); }
+  .rv .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+  .rv .tags .eyebrow { background: var(--peach); }
+  .rv .q { font-size: 1.1rem; line-height: 1.9; margin-bottom: 14px; overflow-wrap: anywhere; }
+  .rv .q .gap { display: inline-block; min-width: 4.5em; border-bottom: 3px solid var(--ink); margin-inline: 4px; }
+  .rv dl { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 8px 14px; margin: 0; align-items: center; }
+  .rv dt { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-weight: 700; }
+  .rv dd { margin: 0; font-weight: 700; overflow-wrap: anywhere; }
+  .rv dd span { display: inline-block; padding: 1px 14px; border: 2.5px solid var(--ol); border-radius: 999px; color: var(--on-pastel); }
+  .rv dd.mine span { background: var(--pink); text-decoration: line-through; text-decoration-thickness: 2px; }
+  .rv dd.right span { background: var(--mint); }
+  .rv .meaning { margin-top: 14px; padding-top: 12px; border-top: 3px dashed var(--ol); color: var(--muted); font-size: 0.95rem; }
+  .rv .meaning .formula { margin-top: 8px; font-size: 0.9rem; }
+  .all-right { background: var(--mint); color: var(--on-pastel); border: 3px solid var(--ol); border-radius: 24px; box-shadow: 6px 6px 0 var(--edge); padding: 20px 24px; }
+
+  @media (max-width: 520px) {
+    .score-top { grid-template-columns: 1fr; justify-items: start; }
+    .facts { gap: 10px; }
+    .facts li { padding: 8px 10px 6px; }
+    .facts b { font-size: 1.35rem; }
+    .who small { display: none; }
+    .panel { box-shadow: 6px 6px 0 var(--edge); }
+    .opts { grid-template-columns: 1fr; }
+    .brow { grid-template-columns: minmax(0, 6.5em) minmax(0, 1fr) 2.8em; gap: 8px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .prog-fill, .ring .val, .btn, .opt { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <header class="bar">
+    <div class="bar-in">
+      <div class="brand">Compare<span>Showdown</span></div>
+      <div class="who" id="who" hidden><small>Student</small><b id="whoName"></b></div>
+    </div>
+    <div class="prog" id="prog" hidden><div class="prog-fill" id="progFill"></div></div>
+  </header>
+
+  <main>
+    <!-- Start -->
+    <section id="start" class="panel">
+      <div class="deco" aria-hidden="true">
+        <span class="c" style="top:-52px; right:-40px; width:170px; height:170px; background:var(--peach)"></span>
+        <span style="top:92px; right:92px; width:34px; height:34px; border:5px solid var(--fill); border-radius:50%"></span>
+        <span class="c" style="top:34px; right:158px; width:16px; height:16px; background:var(--pink)"></span>
+        <span class="c" style="bottom:-50px; right:36px; width:110px; height:110px; background:var(--sky)"></span>
+        <span class="c" style="bottom:44px; right:150px; width:14px; height:14px; background:var(--mint)"></span>
+      </div>
+      <span class="eyebrow">Grade 10 grammar</span>
+      <h1>Compare <em>Showdown</em></h1>
+      <p class="lead">Clear five rounds, one for each type of comparison: equal, comparative, superlative, double and multiple. Choose the answer, type the word or find the mistake. Keep a combo going for bonus points. You get two 50:50 and three formula hints for the whole game. At the end you receive a score out of 10 and a review of your mistakes.</p>
+      <ul class="facts">
+        <li><b>20</b><span>questions</span></li>
+        <li><b>5</b><span>rounds</span></li>
+        <li><b>/10</b><span>score scale</span></li>
+      </ul>
+      <form id="startForm" novalidate>
+        <div class="start-row">
+          <div class="field">
+            <label for="nameInput">Full name</label>
+            <input id="nameInput" type="text" maxlength="60" autocomplete="name" placeholder="Example: Nguyen Van An">
+            <div class="err" id="nameErr" role="alert"></div>
+          </div>
+          <button class="btn" type="submit" style="margin-top: 32px">Start</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Round screen -->
+    <section id="round" hidden>
+      <div class="panel">
+        <div class="deco" aria-hidden="true">
+          <span class="c" style="top:-46px; right:-30px; width:140px; height:140px; background:var(--lav)"></span>
+          <span class="c" style="bottom:-40px; right:70px; width:90px; height:90px; background:var(--mint)"></span>
+          <span class="c" style="bottom:50px; right:20px; width:16px; height:16px; background:var(--pink)"></span>
+        </div>
+        <div class="summary" id="roundSummary" hidden></div>
+        <span class="eyebrow" id="roundNo"></span>
+        <h2 id="roundName"></h2>
+        <p class="sub" id="roundSub"></p>
+        <p class="lead" id="roundText"></p>
+        <div class="actions"><button class="btn" type="button" id="roundBtn">Start round</button></div>
+      </div>
+    </section>
+
+    <!-- Quiz -->
+    <section id="quiz" class="panel" hidden>
+      <div class="deco" aria-hidden="true">
+        <span class="c" style="bottom:-48px; right:-22px; width:96px; height:96px; background:var(--lav)"></span>
+        <span class="c" style="bottom:16px; right:84px; width:14px; height:14px; background:var(--pink)"></span>
+      </div>
+      <div class="qmeta">
+        <div class="num">Question <span id="qNow">1</span> / <span id="qTotal">20</span></div>
+        <div class="stats">
+          <div class="tally">Points: <span id="qPts">0</span></div>
+          <div class="tally combo" id="qCombo" hidden>Combo x<span id="qComboN">2</span></div>
+        </div>
+      </div>
+      <div class="qtop"><span class="rchip" id="qRound"></span><span class="eyebrow" id="qType"></span></div>
+      <form id="qForm" novalidate>
+        <p class="sentence" id="sentence"></p>
+        <p class="note-line" id="qHintLine"></p>
+        <div class="opts" id="opts" hidden></div>
+        <div class="tools">
+          <span class="lbl">Power-ups</span>
+          <button class="btn ghost small" type="button" id="fiftyBtn">50:50</button>
+          <button class="btn ghost small" type="button" id="hintBtn">Formula hint</button>
+        </div>
+        <div class="rulebox" id="rulebox" hidden></div>
+        <div class="feedback" id="feedback" hidden role="status" aria-live="polite"></div>
+        <div class="actions">
+          <button class="btn" type="submit" id="qBtn">Check</button>
+          <span class="note" id="qNote"></span>
+        </div>
+      </form>
+    </section>
+
+    <!-- Result -->
+    <section id="result" hidden>
+      <div class="panel">
+        <div class="deco" aria-hidden="true">
+          <span class="c" style="bottom:-50px; right:-24px; width:110px; height:110px; background:var(--pink)"></span>
+          <span class="c" style="bottom:22px; right:96px; width:16px; height:16px; background:var(--butter)"></span>
+          <span style="top:-18px; right:48px; width:44px; height:44px; border:5px solid var(--fill); border-radius:50%"></span>
+        </div>
+        <div class="score-top">
+          <div class="ring">
+            <svg viewBox="0 0 120 120" aria-hidden="true">
+              <circle class="track" cx="60" cy="60" r="50" fill="none" stroke-width="12"></circle>
+              <circle class="val" id="ringVal" cx="60" cy="60" r="50" fill="none" stroke-width="12" stroke-linecap="round" stroke-dasharray="314.16" stroke-dashoffset="314.16"></circle>
+            </svg>
+            <div class="mid"><b id="score10">0</b><span>/ 10 points</span></div>
+          </div>
+          <div class="score-text">
+            <span class="eyebrow" id="resName"></span>
+            <h2 id="resTitle"></h2>
+            <p>Correct answers: <b id="resCount"></b></p>
+            <p>Game points: <b id="resPts"></b> &nbsp; Best combo: <b id="resCombo"></b></p>
+            <p id="resNote"></p>
+          </div>
+        </div>
+        <div class="breakdown">
+          <h3>Score by structure</h3>
+          <div id="bars" style="display:grid; gap:12px"></div>
+        </div>
+        <div class="result-actions">
+          <button class="btn" type="button" id="againBtn">Play again</button>
+          <button class="btn ghost" type="button" id="renameBtn">Change name</button>
+        </div>
+      </div>
+
+      <div class="review-head">
+        <h2>Review your mistakes</h2>
+        <span class="eyebrow" id="reviewCount"></span>
+      </div>
+      <ol class="review-list" id="reviewList"></ol>
+    </section>
+  </main>
+</div>
+
+<script>
+(function () {
+  var PER = 4;
+  var ROUNDS = [
+    { vi: "So sánh bằng", en: "Equal comparison", rule: [
+      "S + V + as + adj/adv + as + N/pronoun",
+      "Phủ định: not as/so ... as",
+      "as many/much + N + as; the same (+ N) + as; as + adj + a/an + N + as" ] },
+    { vi: "So sánh hơn", en: "Comparative", rule: [
+      "adj-er / more + adj + than; more / fewer / less + N + than",
+      "Nhấn mạnh: much, far, a lot, even, still (không dùng very, so, too)",
+      "Giữa 2 đối tượng: the + so sánh hơn + of the two",
+      "Cùng loại: than that of / those of / mine / yours; than any other + N số ít" ] },
+    { vi: "So sánh nhất", en: "Superlative", rule: [
+      "the + adj-est / most + adj + in + nơi chốn, nhóm số ít; of + nhóm số nhiều",
+      "the + so sánh nhất + N + S + have ever + V3; one of the + so sánh nhất + N số nhiều",
+      "Nhấn mạnh: by far, easily, the very; the second/third + so sánh nhất" ] },
+    { vi: "So sánh kép", en: "Double comparison", rule: [
+      "Càng ngày càng: adj-er and adj-er; more and more + adj/adv/N",
+      "Càng ... càng ...: The + so sánh hơn + S + V, the + so sánh hơn + S + V" ] },
+    { vi: "So sánh bội số", en: "Multiple comparison", rule: [
+      "half / twice / three times + as + adj/adv/many/much + (N) + as ...",
+      "n times + the + size / length / amount / number / price + of + N; twice what + clause" ] }
+  ];
+
+  /* t: mc (choose), type (type the word), err (find the mistake). mc: opts + c (index of correct). err: [A:..] segments + c (letter) + fix. */
+  var Q = [
+    /* Round 1 */
+    { r: 0, t: "type", s: "The test was not ___ difficult as I expected, so I finished early.", ans: ["as", "so"], show: "as / so",
+      why: "Phủ định của so sánh bằng: not as/so + adj + as. Vì vậy điền as hoặc so." },
+    { r: 0, t: "mc", s: "There aren't ___ students in our class as in Class 10A.", opts: ["as many", "as much", "so much", "many as"], c: 0,
+      why: "Students là danh từ đếm được số nhiều nên dùng as many + N + as. As much chỉ dùng với danh từ không đếm được." },
+    { r: 0, t: "err", s: "Minh is [A:not] [B:as] clever [C:than] his brother [D:in Maths].", c: "C", fix: "as",
+      why: "So sánh bằng dùng as ... as, không dùng than. Câu đúng: Minh is not as clever as his brother in Maths." },
+    { r: 0, t: "mc", s: "Nam is ___ talented a singer as his sister.", opts: ["as", "such", "how", "very"], c: 0,
+      why: "Cấu trúc as + adj + a/an + N + as: as talented a singer as." },
+
+    /* Round 2 */
+    { r: 1, t: "mc", s: "Of the two bags, this one is ___.", opts: ["cheaper", "the cheaper", "the cheapest", "more cheap"], c: 1,
+      why: "Khi so sánh giữa 2 đối tượng dùng the + so sánh hơn (+ of the two): the cheaper." },
+    { r: 1, t: "mc", s: "The climate of Hanoi is colder than ___ of Hue.", opts: ["that", "those", "it", "one"], c: 0,
+      why: "Tránh lặp lại danh từ số ít climate: than that of ... Nếu danh từ số nhiều thì dùng those of." },
+    { r: 1, t: "mc", s: "This laptop is ___ more expensive than that one, so I will not buy it.", opts: ["very", "so", "far", "too"], c: 2,
+      why: "Nhấn mạnh so sánh hơn dùng much, far, a lot, even, still. Không dùng very, so, too." },
+    { r: 1, t: "type", s: "Fansipan is higher than ___ other mountain in Viet Nam.", ans: ["any"],
+      why: "So sánh với những đối tượng cùng loại: than any other + N số ít." },
+
+    /* Round 3 */
+    { r: 2, t: "mc", s: "This is the best film I have ever ___.", opts: ["see", "saw", "seen", "seeing"], c: 2,
+      why: "the + so sánh nhất + N + S + have ever + V3, nên dùng seen." },
+    { r: 2, t: "mc", s: "She is the tallest girl ___ the class.", opts: ["of", "in", "than", "as"], c: 1,
+      why: "So sánh nhất dùng in + nơi chốn, nhóm số ít (the class). Dùng of + nhóm số nhiều." },
+    { r: 2, t: "mc", s: "Ha Long Bay is ___ the most beautiful place I have ever visited.", opts: ["by far", "very", "so", "more"], c: 0,
+      why: "Nhấn mạnh so sánh nhất dùng by far, easily, the very. Không dùng very trước the most." },
+    { r: 2, t: "type", s: "Canada is the second ___ country in the world.", ans: ["largest"], note: "Base word: large",
+      why: "the second/third + so sánh nhất: the second largest." },
+
+    /* Round 4 */
+    { r: 3, t: "mc", s: "The weather is getting ___ as winter comes.", opts: ["cold and cold", "colder and colder", "more and more cold", "the colder"], c: 1,
+      why: "Càng ngày càng: adj-er and adj-er. Cold là tính từ ngắn nên dùng colder and colder." },
+    { r: 3, t: "mc", s: "The more you practise, ___ you will speak.", opts: ["the better", "better", "the best", "best"], c: 0,
+      why: "Càng ... càng ...: The + so sánh hơn + S + V, the + so sánh hơn + S + V. Vế sau dùng the better." },
+    { r: 3, t: "type", s: "___ you study, the better your grades will be.", ans: ["the harder"], note: "Base word: hard (write 2 words)",
+      why: "Vế đầu cũng cần the + so sánh hơn: The harder you study, the better your grades will be." },
+    { r: 3, t: "err", s: "[A:The more] you [B:read], [C:better] you [D:understand] the world.", c: "C", fix: "the better",
+      why: "Cả hai vế đều cần the + so sánh hơn: The more you read, the better you understand the world." },
+
+    /* Round 5 */
+    { r: 4, t: "mc", s: "This house is three times ___ as that one.", opts: ["large", "larger", "as large", "the largest"], c: 2,
+      why: "n times + as + adj + as: three times as large as that one." },
+    { r: 4, t: "mc", s: "Prices are now twice ___ they were five years ago.", opts: ["what", "that", "which", "as"], c: 0,
+      why: "Cấu trúc twice what + clause: twice what they were." },
+    { r: 4, t: "type", s: "The ticket costs half ___ much as it did last year.", ans: ["as"],
+      why: "half/twice/three times + as + adj/adv/many/much + (N) + as: half as much as." },
+    { r: 4, t: "mc", s: "The new bridge is twice ___ of the old one.", opts: ["the length", "longer", "as long", "the longest"], c: 0,
+      why: "n times + the + size/length/amount/number/price + of + N: twice the length of the old one." }
+  ];
+
+  var TYPE_LABEL = { mc: "Choose the best answer", type: "Type the missing word", err: "Find the mistake" };
+  var CIRC = 314.16;
+  var LETTERS = ["A", "B", "C", "D"];
+
+  var $ = function (id) { return document.getElementById(id); };
+  var studentName = "", roundIdx = 0, cur = [], qi = 0, results = [], roundStats = [];
+  var answered = false, items = [], input = null, usedFifty = false;
+  var points = 0, combo = 0, bestCombo = 0, fiftyLeft = 2, hintLeft = 3;
+
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+  function norm(s) { return String(s).trim().toLowerCase().replace(/[.!]+$/, "").replace(/\s+/g, " "); }
+  function shuffle(a) {
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  function showScreen(name) {
+    ["start", "round", "quiz", "result"].forEach(function (id) { $(id).hidden = id !== name; });
+    $("prog").hidden = name === "start" || name === "result";
+    window.scrollTo(0, 0);
+  }
+  function fmtScore(n) { return String(n).replace(".", ","); }
+  function parseSegs(s) {
+    return s.split(/(\[[A-D]:[^\]]+\])/).filter(function (p) { return p !== ""; }).map(function (p) {
+      var m = /^\[([A-D]):([^\]]+)\]$/.exec(p);
+      return m ? { seg: true, letter: m[1], text: m[2] } : { seg: false, text: p };
+    });
+  }
+  function plainErr(s) { return s.replace(/\[[A-D]:([^\]]+)\]/g, "$1"); }
+  function segText(q, letter) {
+    var f = parseSegs(q.s).filter(function (p) { return p.seg && p.letter === letter; });
+    return f.length ? f[0].text : "";
+  }
+  function correctText(q) {
+    if (q.t === "mc") return q.opts[q.c];
+    if (q.t === "err") return q.c + ". " + segText(q, q.c) + " (sửa: " + q.fix + ")";
+    return q.show || q.ans[0];
+  }
+
+  /* Start */
+  try { var saved = localStorage.getItem("compare-showdown-name"); if (saved) $("nameInput").value = saved; } catch (e) {}
+
+  $("startForm").addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var v = $("nameInput").value.trim().replace(/\s+/g, " ");
+    if (v.length < 2) {
+      $("nameErr").textContent = "Please enter your full name (at least 2 characters) before you start.";
+      $("nameInput").focus();
+      return;
+    }
+    $("nameErr").textContent = "";
+    studentName = v;
+    try { localStorage.setItem("compare-showdown-name", v); } catch (e) {}
+    $("whoName").textContent = v;
+    $("who").hidden = false;
+    startGame();
+  });
+
+  function setProgress(done) {
+    var f = $("progFill");
+    f.style.width = (done / Q.length * 100) + "%";
+    f.style.borderRightWidth = done === 0 ? "0" : "";
+  }
+
+  function startGame() {
+    results = [];
+    roundStats = ROUNDS.map(function () { return { right: 0, total: 0 }; });
+    points = 0; combo = 0; bestCombo = 0; fiftyLeft = 2; hintLeft = 3;
+    $("qTotal").textContent = Q.length;
+    setProgress(0);
+    showRound(0, null);
+  }
+
+  /* Round screen */
+  function showRound(r, prev) {
+    roundIdx = r;
+    var R = ROUNDS[r];
+    $("roundNo").textContent = "Round " + (r + 1) + " of " + ROUNDS.length;
+    $("roundName").textContent = R.vi;
+    $("roundSub").textContent = R.en;
+    $("roundText").textContent = PER + " questions. Use the formula hint if you need it, but it costs 20 points.";
+    var box = $("roundSummary");
+    box.textContent = "";
+    if (prev) {
+      box.hidden = false;
+      box.appendChild(el("span", "chip", "Round " + (prev.r + 1) + " cleared: " + prev.right + "/" + prev.total));
+      box.appendChild(el("span", "chip", "Points: " + points));
+      if (combo >= 2) box.appendChild(el("span", "chip", "Combo x" + combo));
+    } else {
+      box.hidden = true;
+    }
+    $("roundBtn").textContent = "Start round " + (r + 1);
+    showScreen("round");
+    $("roundBtn").focus();
+  }
+
+  $("roundBtn").addEventListener("click", function () {
+    cur = shuffle(Q.filter(function (q) { return q.r === roundIdx; }));
+    qi = 0;
+    showScreen("quiz");
+    renderQuestion();
+  });
+
+  /* Quiz */
+  function updateStats() {
+    $("qPts").textContent = points;
+    $("qCombo").hidden = combo < 2;
+    $("qComboN").textContent = combo;
+    $("fiftyBtn").textContent = "50:50 (" + fiftyLeft + " left)";
+    $("hintBtn").textContent = "Formula hint (" + hintLeft + " left)";
+  }
+
+  function renderQuestion() {
+    var q = cur[qi];
+    answered = false;
+    usedFifty = false;
+    items = [];
+    input = null;
+    $("qNow").textContent = results.length + 1;
+    setProgress(results.length);
+
+    var chip = $("qRound");
+    chip.textContent = "Round " + (q.r + 1) + ": " + ROUNDS[q.r].vi;
+    chip.className = "rchip c" + q.r;
+    $("qType").textContent = TYPE_LABEL[q.t];
+
+    var sent = $("sentence");
+    sent.textContent = "";
+    var opts = $("opts");
+    opts.textContent = "";
+    opts.hidden = q.t === "type";
+    $("qHintLine").textContent = "";
+
+    if (q.t === "type") {
+      var parts = q.s.split("___");
+      sent.appendChild(document.createTextNode(parts[0]));
+      input = document.createElement("input");
+      input.type = "text";
+      input.className = "blank";
+      input.setAttribute("autocomplete", "off");
+      input.setAttribute("autocapitalize", "none");
+      input.setAttribute("autocorrect", "off");
+      input.setAttribute("spellcheck", "false");
+      input.setAttribute("aria-label", "Answer for question " + (results.length + 1));
+      var longest = Math.max.apply(null, q.ans.map(function (a) { return a.length; }));
+      input.style.width = (Math.max(longest, 7) + 3) + "ch";
+      sent.appendChild(input);
+      sent.appendChild(document.createTextNode(parts[1] || ""));
+      if (q.note) {
+        var nl = $("qHintLine");
+        nl.appendChild(el("b", "", q.note));
+      }
+    } else if (q.t === "mc") {
+      var p2 = q.s.split("___");
+      sent.appendChild(document.createTextNode(p2[0]));
+      var gap = el("span", "gapbox", "?");
+      gap.id = "gapbox";
+      sent.appendChild(gap);
+      sent.appendChild(document.createTextNode(p2[1] || ""));
+      items = shuffle(q.opts.map(function (t, i) { return { t: t, ok: i === q.c }; }));
+    } else {
+      parseSegs(q.s).forEach(function (p) {
+        if (!p.seg) { sent.appendChild(document.createTextNode(p.text)); return; }
+        var sp = el("span", "seg");
+        sp.appendChild(el("i", "", p.letter));
+        sp.appendChild(document.createTextNode(p.text));
+        sent.appendChild(sp);
+        items.push({ t: p.text, ok: p.letter === q.c, letter: p.letter });
+      });
+    }
+
+    if (q.t !== "type") {
+      items.forEach(function (it, i) {
+        var b = el("button", "opt");
+        b.type = "button";
+        b.appendChild(el("span", "let", LETTERS[i]));
+        b.appendChild(el("span", "", it.t));
+        b.addEventListener("click", function () { chooseOption(i); });
+        opts.appendChild(b);
+      });
+    }
+
+    $("rulebox").hidden = true;
+    $("rulebox").textContent = "";
+    var fb = $("feedback");
+    fb.hidden = true;
+    fb.textContent = "";
+    $("fiftyBtn").disabled = q.t === "type" || fiftyLeft < 1;
+    $("hintBtn").disabled = hintLeft < 1;
+
+    var btn = $("qBtn");
+    if (q.t === "type") { btn.hidden = false; btn.textContent = "Check"; $("qNote").textContent = "Press Enter to check"; }
+    else { btn.hidden = true; $("qNote").textContent = "Tap an answer or press A to D"; }
+    updateStats();
+    if (input) { try { input.focus({ preventScroll: true }); } catch (e) { input.focus(); } }
+  }
+
+  function chooseOption(i) {
+    if (answered) return;
+    var q = cur[qi];
+    var it = items[i];
+    var given = q.t === "err" ? it.letter + ". " + it.t : it.t;
+    var btns = $("opts").children;
+    for (var k = 0; k < btns.length; k++) {
+      btns[k].disabled = true;
+      if (items[k].ok) btns[k].classList.add("ok");
+    }
+    if (!it.ok) btns[i].classList.add("no");
+    if (q.t === "mc") {
+      var g = $("gapbox");
+      g.textContent = q.opts[q.c];
+      g.classList.add(it.ok ? "ok" : "no");
+    }
+    finish(it.ok, given);
+  }
+
+  $("qForm").addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    if (answered) { nextStep(); return; }
+    var q = cur[qi];
+    if (q.t !== "type") return;
+    var raw = input.value;
+    if (!raw.trim()) {
+      var fb0 = $("feedback");
+      fb0.className = "feedback no";
+      fb0.hidden = false;
+      fb0.textContent = "";
+      fb0.appendChild(el("div", "head", "No answer yet"));
+      fb0.appendChild(el("div", "", "Type your answer in the blank, then press Check."));
+      input.focus();
+      return;
+    }
+    var given = norm(raw);
+    var ok = q.ans.some(function (a) { return a === given; });
+    input.readOnly = true;
+    input.classList.add(ok ? "ok" : "no");
+    finish(ok, raw.trim());
+  });
+
+  function finish(ok, given) {
+    var q = cur[qi];
+    answered = true;
+    var gain = 0;
+    if (ok) {
+      combo++;
+      if (combo > bestCombo) bestCombo = combo;
+      gain = 100 + Math.min(combo - 1, 4) * 25;
+      points += gain;
+    } else {
+      combo = 0;
+    }
+    results.push({ q: q, ok: ok, given: given });
+    roundStats[q.r].total++;
+    if (ok) roundStats[q.r].right++;
+    setProgress(results.length);
+    updateStats();
+    $("fiftyBtn").disabled = true;
+    $("hintBtn").disabled = true;
+
+    var fb = $("feedback");
+    fb.className = "feedback " + (ok ? "ok" : "no");
+    fb.hidden = false;
+    fb.textContent = "";
+    fb.appendChild(el("div", "head", ok ? "Correct +" + gain + (combo >= 2 ? " (combo x" + combo + ")" : "") : "Not quite"));
+    if (!ok) {
+      var line = el("div", "");
+      line.appendChild(document.createTextNode("Correct answer: "));
+      line.appendChild(el("b", "", correctText(q)));
+      fb.appendChild(line);
+    }
+    fb.appendChild(el("div", "why", q.why));
+
+    var lastInRound = qi === cur.length - 1;
+    var lastOverall = lastInRound && q.r === ROUNDS.length - 1;
+    var btn = $("qBtn");
+    btn.hidden = false;
+    btn.textContent = lastOverall ? "See results" : (lastInRound ? "Finish round" : "Next question");
+    $("qNote").textContent = "Press Enter to continue";
+    btn.focus();
+  }
+
+  function nextStep() {
+    var q = cur[qi];
+    if (qi < cur.length - 1) { qi++; renderQuestion(); return; }
+    var st = roundStats[q.r];
+    if (q.r < ROUNDS.length - 1) {
+      showRound(q.r + 1, { r: q.r, right: st.right, total: st.total });
+    } else {
+      showResult();
+    }
+  }
+
+  /* Power-ups */
+  $("fiftyBtn").addEventListener("click", function () {
+    if (answered || usedFifty || fiftyLeft < 1 || !items.length) return;
+    var wrong = [];
+    items.forEach(function (it, i) { if (!it.ok) wrong.push(i); });
+    shuffle(wrong).slice(0, 2).forEach(function (i) {
+      var b = $("opts").children[i];
+      b.disabled = true;
+      b.classList.add("off");
+    });
+    usedFifty = true;
+    fiftyLeft--;
+    updateStats();
+    $("fiftyBtn").disabled = true;
+  });
+
+  $("hintBtn").addEventListener("click", function () {
+    if (answered || hintLeft < 1) return;
+    var q = cur[qi];
+    var box = $("rulebox");
+    if (box.hidden) {
+      hintLeft--;
+      points = Math.max(0, points - 20);
+      box.textContent = "";
+      box.appendChild(el("div", "head", "Formula: " + ROUNDS[q.r].vi + " (-20 points)"));
+      ROUNDS[q.r].rule.forEach(function (line) { box.appendChild(el("p", "mono", line)); });
+      box.hidden = false;
+      updateStats();
+    }
+    $("hintBtn").disabled = true;
+  });
+
+  document.addEventListener("keydown", function (ev) {
+    if ($("quiz").hidden || answered || ev.ctrlKey || ev.metaKey || ev.altKey) return;
+    var q = cur[qi];
+    if (!q || q.t === "type") return;
+    var k = ev.key.toLowerCase(), i = -1;
+    if (k >= "a" && k <= "d") i = k.charCodeAt(0) - 97;
+    else if (k >= "1" && k <= "4") i = Number(k) - 1;
+    if (i < 0 || i >= items.length) return;
+    var b = $("opts").children[i];
+    if (b && !b.disabled) { ev.preventDefault(); chooseOption(i); }
+  });
+
+  /* Result */
+  function showResult() {
+    var total = results.length;
+    var right = results.filter(function (r) { return r.ok; }).length;
+    var score10 = Math.round(right / total * 100) / 10;
+    showScreen("result");
+    $("resName").textContent = studentName;
+    $("resCount").textContent = right + "/" + total + " questions";
+    $("resPts").textContent = points;
+    $("resCombo").textContent = "x" + bestCombo;
+    $("score10").textContent = fmtScore(score10);
+
+    var title, note;
+    if (score10 >= 9) { title = "Excellent"; note = "You master comparison structures very well."; }
+    else if (score10 >= 8) { title = "Great job"; note = "Only a few details left to strengthen."; }
+    else if (score10 >= 6.5) { title = "Good effort"; note = "Check the mistakes below, then play again to improve."; }
+    else if (score10 >= 5) { title = "Passed"; note = "Go over the structures you missed in the review section."; }
+    else { title = "Keep practicing"; note = "Read the review and the formulas carefully, then play again."; }
+    $("resTitle").textContent = title;
+    $("resNote").textContent = note;
+
+    var ring = $("ringVal");
+    ring.style.strokeDashoffset = CIRC;
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () { ring.style.strokeDashoffset = CIRC * (1 - right / total); });
+    });
+
+    var bars = $("bars");
+    bars.textContent = "";
+    ROUNDS.forEach(function (R, i) {
+      var st = roundStats[i];
+      var row = el("div", "brow");
+      row.appendChild(el("div", "nm", R.vi));
+      var tr = el("div", "btrack");
+      var fl = el("div", "bfill c" + i);
+      fl.style.width = (st.total ? st.right / st.total * 100 : 0) + "%";
+      if (!st.right) fl.style.borderRightWidth = "0";
+      tr.appendChild(fl);
+      row.appendChild(tr);
+      row.appendChild(el("div", "n", st.right + "/" + st.total));
+      bars.appendChild(row);
+    });
+
+    var wrong = [];
+    results.forEach(function (r, i) { if (!r.ok) wrong.push({ n: i + 1, r: r }); });
+    var list = $("reviewList");
+    list.textContent = "";
+    $("reviewCount").textContent = wrong.length ? wrong.length + (wrong.length === 1 ? " mistake to review" : " mistakes to review") : "No mistakes";
+
+    if (!wrong.length) {
+      var li0 = el("li", "all-right");
+      li0.appendChild(el("b", "", "You answered all " + total + " questions correctly. "));
+      li0.appendChild(document.createTextNode("There is nothing to review."));
+      list.appendChild(li0);
+      return;
+    }
+    wrong.forEach(function (w) {
+      var q = w.r.q;
+      var li = el("li", "rv");
+      var tags = el("div", "tags");
+      tags.appendChild(el("span", "eyebrow", "Question " + w.n + " / " + total));
+      tags.appendChild(el("span", "rchip c" + q.r, ROUNDS[q.r].vi));
+      li.appendChild(tags);
+
+      var qd = el("div", "q");
+      if (q.t === "err") {
+        qd.textContent = plainErr(q.s);
+      } else {
+        var parts = q.s.split("___");
+        qd.appendChild(document.createTextNode(parts[0]));
+        qd.appendChild(el("span", "gap"));
+        qd.appendChild(document.createTextNode(parts[1] || ""));
+      }
+      li.appendChild(qd);
+
+      var dl = el("dl");
+      dl.appendChild(el("dt", "", "Your answer"));
+      var dd1 = el("dd", "mine");
+      dd1.appendChild(el("span", "", w.r.given));
+      dl.appendChild(dd1);
+      dl.appendChild(el("dt", "", "Correct answer"));
+      var dd2 = el("dd", "right");
+      dd2.appendChild(el("span", "", correctText(q)));
+      dl.appendChild(dd2);
+      li.appendChild(dl);
+
+      var m = el("div", "meaning");
+      m.appendChild(document.createTextNode(q.why));
+      var f = el("div", "formula mono", ROUNDS[q.r].rule[0]);
+      m.appendChild(f);
+      li.appendChild(m);
+      list.appendChild(li);
+    });
+  }
+
+  $("againBtn").addEventListener("click", startGame);
+  $("renameBtn").addEventListener("click", function () {
+    $("who").hidden = true;
+    showScreen("start");
+    $("nameInput").focus();
+  });
+})();
+</script>
+
+</body>
+</html>
